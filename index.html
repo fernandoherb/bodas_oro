@@ -266,7 +266,7 @@
                 </a>
 
                 <!-- Botón de Guardar Invitación re-incorporado -->
-                <button onclick="window.print()" class="bg-transparent border border-gray-600 text-gray-400 px-10 py-5 rounded-full font-bold uppercase text-xs tracking-[0.2em] hover:border-white hover:text-white transition">
+                <button onclick="descargarImagen()" class="bg-transparent border border-gray-600 text-gray-400 px-10 py-5 rounded-full font-bold uppercase text-xs tracking-[0.2em] hover:border-white hover:text-white transition">
                     Guardar Invitación
                 </button>
             </div>
@@ -282,8 +282,9 @@
         </div>
     </footer>
 
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <!-- Script para el Carrusel -->
-    <script>
+    <script>        
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-item');
         const dots = document.querySelectorAll('.carousel-dot');
@@ -365,6 +366,20 @@
 
                 currentSlide = index;
             }
+
+        function descargarImagen() {
+            const elemento = document.body; // puedes cambiar a un div específico
+
+            html2canvas(elemento, {
+                scale: 2, // mejor calidad
+                useCORS: true
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'invitacion.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
     </script>
 
 </body>
