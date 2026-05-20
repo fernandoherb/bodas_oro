@@ -249,7 +249,7 @@
             
             <div class="flex flex-col md:flex-row justify-center gap-6">
                 <!-- Botón de WhatsApp actualizado con target="_blank" -->
-                <a href="https://wa.me/3339526248?text=%C2%A1Hola%21%20Confirmo%20mi%20asistencia%20para%20las%20Bodas%20de%20Oro%20de%20Margarita%20y%20Fernando%20y%20el%2070%20aniversario.%20Somos%20___%20personas." 
+                <a id="btn-whatsapp" href="https://wa.me/3339526248?text=%C2%A1Hola%21%20Confirmo%20mi%20asistencia%20para%20las%20Bodas%20de%20Oro%20de%20Margarita%20y%20Fernando%20y%20cumpleaños%2070%20de%20Margarita.%20Somos%20___%20personas." 
                    target="_blank" rel="noopener noreferrer"
                    class="gold-bg text-white px-12 py-5 rounded-full font-bold uppercase text-xs tracking-[0.2em] hover:scale-105 transition shadow-2xl">
                     Confirmar por WhatsApp
@@ -380,6 +380,22 @@
                     link.click();
                 });
         }
+
+        // Detectar la referencia en la URL (?ref=m o ?ref=f)
+        const urlParams = new URLSearchParams(window.location.search);
+        const referencia = urlParams.get('ref');
+
+        const btnWhatsapp = document.getElementById('btn-whatsapp');
+
+        // Si el enlace tiene '?ref=m' (tu hermana)
+        if (referencia === 'm') {
+            const numeroHermana = "3335033664"; // <-- Aquí pones el número de tu hermana completo con clave lada (sin el signo +)
+            const textoHermana = encodeURIComponent("¡Hola! Confirmo mi asistencia para las Bodas de Oro de Margarita y Fernando y cumpeaños 70 de Margarita. Somos _ personas.");
+
+            // Cambiamos el enlace del botón dinámicamente
+            btnWhatsapp.href = `https://wa.me/${numeroHermana}?text=${textoHermana}`;
+        }
+        // Si no trae '?ref=m' o trae '?ref=f', por defecto se queda con tu número que ya está duro en el HTML.
 
     </script>
 
