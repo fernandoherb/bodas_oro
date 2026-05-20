@@ -79,18 +79,10 @@
         <!-- Opciones de Fondo (Carrusel) -->
         <div class="carousel-item active" style="background-image: url('img/photo00.jpeg?auto=format&fit=crop&q=80&w=2069');"></div>
         <div class="carousel-item" style="background-image: url('img/photo01.jpeg?auto=format&fit=crop&q=80&w=2070');"></div>
-        <div class="carousel-item" style="background-image: url('img/photo02.jpg?auto=format&fit=crop&q=80&w=2070');"></div>
-        <div class="carousel-item" style="background-image: url('img/photo03.jpg?auto=format&fit=crop&q=80&w=2070');"></div>
         <div class="carousel-item" style="background-image: url('img/photo04.jpg?auto=format&fit=crop&q=80&w=2070');"></div>
         <div class="carousel-item" style="background-image: url('img/photo05.jpg?auto=format&fit=crop&q=80&w=2070');"></div>
-        <div class="carousel-item" style="background-image: url('img/photo06.jpg?auto=format&fit=crop&q=80&w=2070');"></div>
-        <div class="carousel-item" style="background-image: url('img/photo07.jpg?auto=format&fit=crop&q=80&w=2070');"></div>
-        <div class="carousel-item" style="background-image: url('img/photo08.jpg?auto=format&fit=crop&q=80&w=2070');"></div>
         <div class="carousel-item" style="background-image: url('img/photo09.jpg?auto=format&fit=crop&q=80&w=2070');"></div>
-        <div class="carousel-item" style="background-image: url('img/photo10.jpg?auto=format&fit=crop&q=80&w=2070');"></div>
         <div class="carousel-item" style="background-image: url('img/photo11.jpg?auto=format&fit=crop&q=80&w=2070');"></div>
-        <div class="carousel-item" style="background-image: url('img/photo12.jpg?auto=format&fit=crop&q=80&w=2070');"></div>
-        <div class="carousel-item" style="background-image: url('img/photo13.jpg?auto=format&fit=crop&q=80&w=2070');"></div>
 
         <!-- Contenido del Hero -->
         <div class="relative z-10 text-center px-4">
@@ -108,7 +100,9 @@
             </div>
 
             <div class="mt-12">
-                <span class="text-white border-y border-gold-500 py-2 px-8 inline-block text-xl tracking-widest uppercase">17 Octubre 2026</span>
+                <span class="text-white bg-black/30 backdrop-blur-sm border-y-2 border-amber-500 py-3 px-10 inline-block text-2xl md:text-4xl font-bold tracking-[0.25em] uppercase shadow-lg">
+                    17 Octubre 2026
+                </span>
             </div>
         </div>
 
@@ -120,19 +114,6 @@
             <button onclick="setSlide(3)" class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50"></button>
             <button onclick="setSlide(4)" class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50"></button>
             <button onclick="setSlide(5)" class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50"></button>
-            <button onclick="setSlide(6)" class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50"></button>
-            <button onclick="setSlide(7)" class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50"></button>
-            <button onclick="setSlide(8)" class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50"></button>
-            <button onclick="setSlide(9)" class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50"></button>
-            <button onclick="setSlide(10)" class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50"></button>
-            <button onclick="setSlide(11)" class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50"></button>
-            <button onclick="setSlide(12)" class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50"></button>
-            <button onclick="setSlide(13)" class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50"></button>
-        </div>
-
-
-        <div class="absolute bottom-4 left-0 right-0 z-20 text-center">
-            <p class="text-white text-[10px] uppercase tracking-widest opacity-60">(Opciones de fondo para decidir)</p>
         </div>
     </header>
 
@@ -181,7 +162,7 @@
                             "Posteriormente, nos reuniremos para brindar por este hermoso camino recorrido y por los 70 años de vida de nuestra mamá. ¡Esperamos verte desde el inicio!"
                         </p>
                         <p class="font-bold text-lg mb-2 underline decoration-gold-500 uppercase tracking-widest text-xs">Recepción Sorpresa</p>
-                        <p class="text-gray-600 mb-1 font-semibold">Ubicación Secreta</p>
+                        <p class="text-gray-600 mb-1 font-semibold">Ubicación</p>
                         <p class="text-gray-500 text-sm mb-4">A solo 20 min. de la Iglesia.<br><br>*El mapa y los boletos digitales se enviarán al confirmar asistencia.</p>
                     </div>
                     <div>
@@ -240,7 +221,14 @@
                     <div class="w-12 h-12 gold-bg text-white rounded-full flex items-center justify-center mb-6 font-bold text-lg shadow-inner mx-auto group-hover:scale-110 transition-transform">2</div>
                     <h4 class="font-bold mb-3 uppercase text-sm tracking-widest">Confirmación</h4>
                     <p class="text-sm text-gray-900 leading-relaxed font-semibold italic">"Tu presencia es fundamental para nuestra logística secreta."</p>
-                    <p class="text-sm text-red-600 mt-4 font-black uppercase border-t border-red-100 pt-2 tracking-tighter">Límite: 15 de Agosto</p>
+                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 mt-4 shadow-inner">
+                        <p class="text-[10px] uppercase tracking-[0.15em] text-amber-800 font-bold mb-1 flex items-center justify-center gap-1">
+                            ⚠️ FECHA MÁXIMA PARA CONFIRMAR:
+                        </p>
+                        <p class="text-lg font-black text-red-600 tracking-wide uppercase">
+                            15 de Agosto
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Step 3 -->
@@ -294,18 +282,10 @@
         const names = [
             "photo00.jpeg",
             "photo01.jpeg",
-            "photo02.jpg",
-            "photo03.jpg",
             "photo04.jpg",
             "photo05.jpg",
-            "photo06.jpg",
-            "photo07.jpg",
-            "photo08.jpg",
             "photo09.jpg",
-            "photo10.jpg",
             "photo11.jpg",
-            "photo12.jpg",
-            "photo13.jpg",
         ];
 
         dots.forEach((dot, i) => {
@@ -353,18 +333,13 @@
             clearInterval(autoSlide);
         }
 
-        const label = document.createElement('div');
-            label.className = "absolute bottom-20 left-1/2 -translate-x-1/2 text-white text-xs bg-black/40 px-3 py-1 rounded";
-            label.textContent = names[0];
-            document.getElementById('hero-carousel').appendChild(label);
-
+        
             function showSlide(index) {
                 slides.forEach(slide => slide.classList.remove('active'));
                 dots.forEach(dot => dot.style.opacity = "0.5");
 
                 slides[index].classList.add('active');
                 dots[index].style.opacity = "1";
-                label.textContent = names[index];
 
                 currentSlide = index;
             }
