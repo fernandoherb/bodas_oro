@@ -186,7 +186,7 @@
                             <span class="bg-gold-100 text-gold-800 text-xs font-bold px-3 py-1 rounded-full">3:00 PM - 10:00 PM</span>
                         </div>
                         <p class="italic text-gray-400 font-serif text-lg">Ubicación Sorpresa</p>
-                        <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">* Se enviará mapa al confirmar asistencia.</p>
+                        <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">* Se enviará mapa y boletos digitales al confirmar asistencia.</p>
                     </div>
                 </div>
             </div>
@@ -254,7 +254,7 @@
     <!-- Footer / RSVP Section -->
     <footer class="py-24 bg-[#1a1a1a] text-white text-center px-6">
         <div class="max-w-4xl mx-auto">
-            <p class="script-font text-4xl md:text-5xl mb-8 gold-gradient leading-tight">Gracias por ser parte de nuestra historia y de este gran secreto</p>
+            <p class="script-font text-4xl md:text-5xl mb-8 gold-gradient leading-tight">Gracias por ser parte de nuestra historia y de esta gran sorpresa</p>
             <p class="text-gray-400 text-sm mb-12 tracking-[0.4em] uppercase font-bold">Familia Hernández Barreto</p>
             
             <div class="flex flex-col md:flex-row justify-center gap-6">
@@ -318,7 +318,7 @@
         let autoSlide = setInterval(() => {
             let nextSlide = (currentSlide + 1) % slides.length;
             showSlide(nextSlide);
-        }, 6000);
+        }, 3000);
 
         let startX = 0;
         let endX = 0;
@@ -368,18 +368,42 @@
             }
 
         function descargarImagen() {
-            const elemento = document.body; // puedes cambiar a un div específico
+            const url = 'invitacion.jpg';
+            const nombreArchivo = 'Invitacion_Margarita_y_Fernando.jpg';
 
-            html2canvas(elemento, {
-                scale: 2, // mejor calidad
-                useCORS: true
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'invitacion.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            });
+            // Forzamos la descarga haciendo una petición interna del archivo como Blob (objeto binario)
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error('Error al cargar la imagen');
+                    return response.blob();
+                })
+                .then(blob => {
+                    // Creamos una URL temporal segura apuntando al objeto binario cifrado
+                    const blobUrl = window.URL.createObjectURL(blob);
+                    
+                    const link = document.createElement('a');
+                    link.href = blobUrl;
+                    link.download = nombreArchivo;
+                    
+                    // Añadimos el enlace temporal al documento para máxima compatibilidad
+                    document.body.appendChild(link);
+                    link.click();
+                    
+                    // Limpiamos la memoria removiendo el enlace y la URL temporal
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(blobUrl);
+                })
+                .catch(error => {
+                    console.error('Error en la descarga:', error);
+                    // Opción de respaldo tradicional si el fetch falla localmente
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = nombreArchivo;
+                    link.target = '_blank';
+                    link.click();
+                });
         }
+
     </script>
 
 </body>
