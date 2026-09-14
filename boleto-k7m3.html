@@ -1,0 +1,257 @@
+<!-- USO INTERNO: este boleto es para 3 personas (código k7m3) -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boleto de Recepción (3 Personas) - Bodas de Oro</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;700;900&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f4f1ea;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel', serif;
+        }
+        .script-font {
+            font-family: 'Great Vibes', cursive;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-bg {
+            background: linear-gradient(135deg, #bf953f, #d4af37, #aa771c);
+        }
+
+        /* ===================================================== */
+        /*  EDITA AQUÍ: nombre del lugar y dirección de la recepción */
+        /* ===================================================== */
+
+        /* Ticket look & feel (escritorio: cuerpo + talón lado a lado) */
+        .ticket {
+            width: 100%;
+            max-width: 820px;
+            display: grid;
+            grid-template-columns: 1fr 220px;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.35);
+            position: relative;
+        }
+        .ticket-main {
+            padding: 3rem 3rem 2.5rem 3rem;
+            position: relative;
+        }
+        .ticket-stub {
+            background: #1a1a1a;
+            border-radius: 0 18px 18px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            position: relative;
+        }
+        /* Línea perforada entre el cuerpo y el talón */
+        .ticket-main::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            border-right: 2px dashed #d9d2c2;
+        }
+        /* Muescas circulares (efecto boleto real) */
+        .ticket-stub::before,
+        .ticket-stub::after {
+            content: '';
+            position: absolute;
+            left: -14px;
+            width: 28px;
+            height: 28px;
+            background: #f4f1ea;
+            border-radius: 50%;
+        }
+        .ticket-stub::before { top: -14px; }
+        .ticket-stub::after { bottom: -14px; }
+
+        .field-label {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #b38728;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        /* Vista móvil: el talón pasa de estar a la derecha a quedar abajo,
+           y la línea/muescas perforadas cambian de verticales a horizontales */
+        @media (max-width: 640px) {
+            .ticket {
+                grid-template-columns: 1fr;
+                max-width: 380px;
+            }
+            .ticket-main {
+                padding: 2.25rem 1.75rem 2.5rem;
+            }
+            .ticket-stub {
+                border-radius: 0 0 18px 18px;
+                padding: 1.5rem 1.5rem 1.75rem;
+            }
+            .ticket-main::after {
+                top: auto;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 0;
+                border-right: none;
+                border-bottom: 2px dashed #d9d2c2;
+            }
+            .ticket-stub::before,
+            .ticket-stub::after {
+                left: auto;
+                top: -14px;
+                bottom: auto;
+            }
+            .ticket-stub::before { left: -14px; }
+            .ticket-stub::after { right: -14px; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
+
+    <div class="ticket">
+        <!-- Cuerpo del boleto -->
+        <div class="ticket-main">
+            <p class="uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[10px] sm:text-[11px] text-gray-400 mb-3">Bodas de Oro &bull; Cumpleaños 70</p>
+            <h1 class="gold-gradient font-bold text-2xl sm:text-3xl md:text-4xl leading-tight mb-1">Margarita &amp; Fernando</h1>
+            <p class="script-font text-xl sm:text-2xl text-gray-500 mb-6 sm:mb-8">Recepción Sorpresa</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 sm:gap-y-6 mb-6 sm:mb-8">
+                <div class="sm:col-span-2">
+                    <p class="field-label">Lugar</p>
+                    <p class="font-semibold text-gray-800 text-base sm:text-lg">[NOMBRE DEL LUGAR]</p>
+                </div>
+                <div class="sm:col-span-2">
+                    <p class="field-label">Dirección</p>
+                    <p class="text-gray-700 text-sm leading-relaxed">[DIRECCIÓN COMPLETA DEL LUGAR]</p>
+                </div>
+                <div>
+                    <p class="field-label">Fecha</p>
+                    <p class="text-gray-800 font-semibold">17 de Octubre, 2026</p>
+                </div>
+                <div>
+                    <p class="field-label">Horario</p>
+                    <p class="text-gray-800 font-semibold">3:00 PM &ndash; 10:00 PM</p>
+                </div>
+            </div>
+
+            <!-- EDITA AQUÍ: pega el link de Google Maps (o el que uses) del lugar -->
+            <a id="btn-ver-ubicacion" href="https://maps.app.goo.gl/YdrmnLE1xrkPrYGe9" target="_blank" rel="noopener noreferrer"
+               class="inline-block gold-bg text-white px-6 py-2.5 rounded-full uppercase text-[11px] font-bold tracking-widest hover:scale-105 transition-transform shadow-md mb-6 sm:mb-8">
+                Ver Ubicación en Maps
+            </a>
+
+            <p class="text-[10px] text-gray-400 uppercase tracking-[0.2em]">Evento Privado &bull; Estrictamente Sorpresa</p>
+        </div>
+
+        <!-- Talón del boleto -->
+        <div class="ticket-stub">
+            <div class="w-14 h-14 rounded-full border border-amber-400/60 flex items-center justify-center mb-4">
+                <span id="badge-5070" class="text-amber-400 text-xs font-bold italic">50|70</span>
+            </div>
+            <p class="uppercase text-[10px] tracking-[0.2em] text-gray-400 mb-2">Boleto para</p>
+            <p id="num-personas" class="text-5xl font-black text-amber-400 leading-none mb-1">3</p>
+            <p class="uppercase text-xs tracking-[0.2em] text-gray-300">Personas</p>
+        </div>
+    </div>
+
+    <!-- Este botón queda fuera del boleto a propósito: así nunca aparece dentro de la imagen descargada -->
+    <button id="btn-guardar-boleto" onclick="guardarBoletoImagen()"
+            class="mt-8 inline-flex items-center gap-2 border border-gray-400 text-gray-600 px-8 py-3 rounded-full uppercase text-[11px] font-bold tracking-widest hover:border-gray-800 hover:text-gray-800 transition">
+        Guardar como Imagen
+    </button>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        function guardarBoletoImagen() {
+            const boton = document.getElementById('btn-guardar-boleto');
+            const textoOriginal = boton.textContent;
+            boton.disabled = true;
+            boton.textContent = 'Generando...';
+
+            html2canvas(document.querySelector('.ticket'), {
+                backgroundColor: '#f4f1ea',
+                useCORS: true,
+                allowTaint: true,
+                // El botón de "Ver Ubicación" es solo para la pantalla, no debe salir en la imagen
+                ignoreElements: (el) => el.id === 'btn-ver-ubicacion',
+                onclone: (clonedDoc) => {
+                    // html2canvas no soporta texto con degradado (background-clip: text);
+                    // en la copia usada para la captura lo cambiamos por dorado sólido.
+                    clonedDoc.querySelectorAll('.gold-gradient').forEach((el) => {
+                        el.style.background = 'none';
+                        el.style.webkitBackgroundClip = 'initial';
+                        el.style.backgroundClip = 'initial';
+                        el.style.webkitTextFillColor = '#d4af37';
+                        el.style.color = '#d4af37';
+                    });
+                    // html2canvas tampoco renderiza bien el box-shadow junto con
+                    // bordes redondeados (deja una mancha gris); lo quitamos solo aquí.
+                    const ticketClone = clonedDoc.querySelector('.ticket');
+                    if (ticketClone) ticketClone.style.boxShadow = 'none';
+                    // html2canvas descentra el texto en cursiva (italic); lo
+                    // enderezamos solo para la captura.
+                    const badge = clonedDoc.getElementById('badge-5070');
+                    if (badge) {
+                        badge.style.fontStyle = 'normal';
+                        badge.parentElement.style.textAlign = 'center';
+                    }
+                    // html2canvas dibuja el glifo "1"/"2" desalineado en Montserrat
+                    // (peso 900 o 700); con Cinzel (la misma fuente de los títulos)
+                    // se centra bien. Solo afecta a la imagen, no a la pantalla.
+                    const numPersonas = clonedDoc.getElementById('num-personas');
+                    if (numPersonas) {
+                        numPersonas.style.width = '50%';
+                        numPersonas.style.height = '15%';
+                        numPersonas.style.display = 'block';
+                        numPersonas.style.textAlign = 'center';
+                        numPersonas.style.fontWeight = '700';
+                        numPersonas.style.fontFamily = 'Cinzel, serif';
+                    }
+                }
+            }).then(ticketCanvas => {
+                // Dejamos un margen de aire alrededor del boleto en la imagen final
+                const margen = Math.round(ticketCanvas.width * 0.06);
+                const finalCanvas = document.createElement('canvas');
+                finalCanvas.width = ticketCanvas.width + margen * 2;
+                finalCanvas.height = ticketCanvas.height + margen * 2;
+                const ctx = finalCanvas.getContext('2d');
+                ctx.fillStyle = '#f4f1ea';
+                ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
+                ctx.drawImage(ticketCanvas, margen, margen);
+
+                const link = document.createElement('a');
+                link.href = finalCanvas.toDataURL('image/jpeg', 0.95);
+                link.download = 'Boleto_k7m3.jpg';
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+            }).catch(error => {
+                console.error('Error generando la imagen del boleto:', error);
+            }).finally(() => {
+                boton.disabled = false;
+                boton.textContent = textoOriginal;
+            });
+        }
+    </script>
+
+</body>
+</html>
