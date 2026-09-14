@@ -137,11 +137,11 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 sm:gap-y-6 mb-6 sm:mb-8">
                 <div class="sm:col-span-2">
                     <p class="field-label">Lugar</p>
-                    <p class="font-semibold text-gray-800 text-base sm:text-lg">[NOMBRE DEL LUGAR]</p>
+                    <p class="font-semibold text-gray-800 text-base sm:text-lg">Mansión Mansur</p>
                 </div>
                 <div class="sm:col-span-2">
                     <p class="field-label">Dirección</p>
-                    <p class="text-gray-700 text-sm leading-relaxed">[DIRECCIÓN COMPLETA DEL LUGAR]</p>
+                    <p class="text-gray-700 text-sm leading-relaxed">C. Administradores 5376, Arcos de Guadalupe, 45037 Zapopan, Jal.</p>
                 </div>
                 <div>
                     <p class="field-label">Fecha</p>
@@ -154,7 +154,7 @@
             </div>
 
             <!-- EDITA AQUÍ: pega el link de Google Maps (o el que uses) del lugar -->
-            <a id="btn-ver-ubicacion" href="https://maps.app.goo.gl/YdrmnLE1xrkPrYGe9" target="_blank" rel="noopener noreferrer"
+            <a id="btn-ver-ubicacion" href="https://maps.app.goo.gl/cT1ZUvoWpnijqGmH7" target="_blank" rel="noopener noreferrer"
                class="inline-block gold-bg text-white px-6 py-2.5 rounded-full uppercase text-[11px] font-bold tracking-widest hover:scale-105 transition-transform shadow-md mb-6 sm:mb-8">
                 Ver Ubicación en Maps
             </a>
@@ -179,77 +179,30 @@
         Guardar como Imagen
     </button>
 
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
+        // La imagen del boleto ya viene pre-generada (captura de escritorio,
+        // sin el botón "Ver Ubicación"), así que solo la descargamos.
         function guardarBoletoImagen() {
-            const boton = document.getElementById('btn-guardar-boleto');
-            const textoOriginal = boton.textContent;
-            boton.disabled = true;
-            boton.textContent = 'Generando...';
+            const nombreArchivo = 'Boleto_k7m3.jpg';
 
-            html2canvas(document.querySelector('.ticket'), {
-                backgroundColor: '#f4f1ea',
-                useCORS: true,
-                allowTaint: true,
-                // El botón de "Ver Ubicación" es solo para la pantalla, no debe salir en la imagen
-                ignoreElements: (el) => el.id === 'btn-ver-ubicacion',
-                onclone: (clonedDoc) => {
-                    // html2canvas no soporta texto con degradado (background-clip: text);
-                    // en la copia usada para la captura lo cambiamos por dorado sólido.
-                    clonedDoc.querySelectorAll('.gold-gradient').forEach((el) => {
-                        el.style.background = 'none';
-                        el.style.webkitBackgroundClip = 'initial';
-                        el.style.backgroundClip = 'initial';
-                        el.style.webkitTextFillColor = '#d4af37';
-                        el.style.color = '#d4af37';
-                    });
-                    // html2canvas tampoco renderiza bien el box-shadow junto con
-                    // bordes redondeados (deja una mancha gris); lo quitamos solo aquí.
-                    const ticketClone = clonedDoc.querySelector('.ticket');
-                    if (ticketClone) ticketClone.style.boxShadow = 'none';
-                    // html2canvas descentra el texto en cursiva (italic); lo
-                    // enderezamos solo para la captura.
-                    const badge = clonedDoc.getElementById('badge-5070');
-                    if (badge) {
-                        badge.style.fontStyle = 'normal';
-                        badge.parentElement.style.textAlign = 'center';
-                    }
-                    // html2canvas dibuja el glifo "1"/"2" desalineado en Montserrat
-                    // (peso 900 o 700); con Cinzel (la misma fuente de los títulos)
-                    // se centra bien. Solo afecta a la imagen, no a la pantalla.
-                    const numPersonas = clonedDoc.getElementById('num-personas');
-                    if (numPersonas) {
-                        numPersonas.style.width = '50%';
-                        numPersonas.style.height = '15%';
-                        numPersonas.style.display = 'block';
-                        numPersonas.style.textAlign = 'center';
-                        numPersonas.style.fontWeight = '700';
-                        numPersonas.style.fontFamily = 'Cinzel, serif';
-                    }
-                }
-            }).then(ticketCanvas => {
-                // Dejamos un margen de aire alrededor del boleto en la imagen final
-                const margen = Math.round(ticketCanvas.width * 0.06);
-                const finalCanvas = document.createElement('canvas');
-                finalCanvas.width = ticketCanvas.width + margen * 2;
-                finalCanvas.height = ticketCanvas.height + margen * 2;
-                const ctx = finalCanvas.getContext('2d');
-                ctx.fillStyle = '#f4f1ea';
-                ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
-                ctx.drawImage(ticketCanvas, margen, margen);
-
-                const link = document.createElement('a');
-                link.href = finalCanvas.toDataURL('image/jpeg', 0.95);
-                link.download = 'Boleto_k7m3.jpg';
-                document.body.appendChild(link);
-                link.click();
-                link.remove();
-            }).catch(error => {
-                console.error('Error generando la imagen del boleto:', error);
-            }).finally(() => {
-                boton.disabled = false;
-                boton.textContent = textoOriginal;
-            });
+            fetch(nombreArchivo)
+                .then(response => {
+                    if (!response.ok) throw new Error('Error al cargar la imagen');
+                    return response.blob();
+                })
+                .then(blob => {
+                    const blobUrl = window.URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = blobUrl;
+                    link.download = nombreArchivo;
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove();
+                    window.URL.revokeObjectURL(blobUrl);
+                })
+                .catch(error => {
+                    console.error('Error en la descarga:', error);
+                });
         }
     </script>
 
