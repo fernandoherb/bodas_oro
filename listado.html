@@ -23,43 +23,70 @@
 </head>
 <body class="min-h-screen flex items-center justify-center p-6">
 
-    <div class="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8 sm:p-10">
+    <div class="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-8 sm:p-10">
         <p class="uppercase tracking-[0.2em] text-[11px] text-red-500 font-bold mb-2">Uso interno &bull; No compartir</p>
         <h1 class="gold-gradient font-bold text-2xl sm:text-3xl mb-1">Listado de Boletos</h1>
         <p class="text-gray-500 text-sm mb-8">Bodas de Oro &middot; Margarita &amp; Fernando</p>
 
-        <div class="divide-y divide-gray-200">
-            <a href="boleto-f831.html" class="flex items-center justify-between py-4 hover:bg-gray-50 -mx-2 px-2 rounded-lg transition">
-                <span class="font-semibold text-gray-800">1 Persona</span>
-                <span class="text-sm text-gray-400">boleto-f831.html</span>
-            </a>
-            <a href="boleto-9dq2.html" class="flex items-center justify-between py-4 hover:bg-gray-50 -mx-2 px-2 rounded-lg transition">
-                <span class="font-semibold text-gray-800">2 Personas</span>
-                <span class="text-sm text-gray-400">boleto-9dq2.html</span>
-            </a>
-            <a href="boleto-k7m3.html" class="flex items-center justify-between py-4 hover:bg-gray-50 -mx-2 px-2 rounded-lg transition">
-                <span class="font-semibold text-gray-800">3 Personas</span>
-                <span class="text-sm text-gray-400">boleto-k7m3.html</span>
-            </a>
-            <a href="boleto-p2x4.html" class="flex items-center justify-between py-4 hover:bg-gray-50 -mx-2 px-2 rounded-lg transition">
-                <span class="font-semibold text-gray-800">4 Personas</span>
-                <span class="text-sm text-gray-400">boleto-p2x4.html</span>
-            </a>
-            <a href="boleto-t9v5.html" class="flex items-center justify-between py-4 hover:bg-gray-50 -mx-2 px-2 rounded-lg transition">
-                <span class="font-semibold text-gray-800">5 Personas</span>
-                <span class="text-sm text-gray-400">boleto-t9v5.html</span>
-            </a>
-            <a href="boleto-q4z6.html" class="flex items-center justify-between py-4 hover:bg-gray-50 -mx-2 px-2 rounded-lg transition">
-                <span class="font-semibold text-gray-800">6 Personas</span>
-                <span class="text-sm text-gray-400">boleto-q4z6.html</span>
-            </a>
-        </div>
+        <div id="boletos-list" class="divide-y divide-gray-200"></div>
 
         <p class="text-[11px] text-gray-400 mt-8 leading-relaxed">
             Este archivo es solo para tu referencia: relaciona cada código de boleto con el número de personas.
             No lo envíes a los invitados ni lo subas a un lugar público.
         </p>
     </div>
+
+    <script>
+        const BASE_URL = 'https://margaritayfernando.com/boletos/';
+
+        const boletos = [
+            { archivo: 'boleto-f831.html', personas: '1 Persona' },
+            { archivo: 'boleto-9dq2.html', personas: '2 Personas' },
+            { archivo: 'boleto-k7m3.html', personas: '3 Personas' },
+            { archivo: 'boleto-p2x4.html', personas: '4 Personas' },
+            { archivo: 'boleto-t9v5.html', personas: '5 Personas' },
+            { archivo: 'boleto-q4z6.html', personas: '6 Personas' },
+        ];
+
+        const listEl = document.getElementById('boletos-list');
+
+        boletos.forEach(({ archivo, personas }) => {
+            const link = BASE_URL + archivo;
+
+            const row = document.createElement('div');
+            row.className = 'flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 py-4';
+
+            row.innerHTML = `
+                <a href="boletos/${archivo}" class="flex items-center justify-between sm:justify-start sm:gap-4 hover:bg-gray-50 -mx-2 px-2 rounded-lg transition flex-shrink-0 sm:w-40">
+                    <span class="font-semibold text-gray-800">${personas}</span>
+                </a>
+                <div class="flex items-center gap-2 min-w-0">
+                    <input type="text" readonly value="${link}"
+                        class="flex-1 min-w-0 text-xs text-gray-500 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 truncate focus:outline-none">
+                    <button type="button" data-link="${link}"
+                        class="btn-copy flex-shrink-0 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-amber-700 border border-amber-400 rounded-lg px-3 py-2 hover:bg-amber-50 transition">
+                        Copiar
+                    </button>
+                </div>
+            `;
+
+            listEl.appendChild(row);
+        });
+
+        listEl.addEventListener('click', async (event) => {
+            const btn = event.target.closest('.btn-copy');
+            if (!btn) return;
+
+            try {
+                await navigator.clipboard.writeText(btn.dataset.link);
+                const textoOriginal = btn.textContent;
+                btn.textContent = '¡Copiado!';
+                setTimeout(() => { btn.textContent = textoOriginal; }, 1500);
+            } catch (error) {
+                console.error('Error al copiar el link:', error);
+            }
+        });
+    </script>
 
 </body>
 </html>
